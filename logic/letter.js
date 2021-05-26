@@ -1,6 +1,6 @@
 // FUNCTIONS
 // ==========================================================================
-// The letter() constructor handles displaying either an underscore or the underlying character for each letter in the word
+// The letter() constructor handles displaying either an underscore or the underlying character for each letter in the hidden word
 function letter(char) {
     // If a character is not a letter or a number, make it visible
     this.visible = !/[a-z1-9]/i.test(char);

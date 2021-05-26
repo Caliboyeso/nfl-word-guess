@@ -50,7 +50,7 @@ Word.prototype.guessLetter = function(char) {
 
 // This function returns true if all letters in the word have been guessed correctly
 Word.prototype.guessedCorrectly = function() {
-    // This returns true if the callback function returns true for every element in the array
+    // This callback function returns true for every element in the array
     return this.letters.every(function(letter) {
         // Returns the letter and makes it visible
         return letter.visible;

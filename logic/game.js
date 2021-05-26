@@ -9,20 +9,20 @@ var chalk = require("chalk");
 // This stores the word.js file
 var word = require("./word");
 
-// This stores the wordsList.js file
-var wordsList = require("./wordsList");
+// This stores the nflList.js file
+var nflList = require("./nflList");
 
 
 // FUNCTIONS
 // ==========================================================================
 // The Game() constructor is responsible for keeping score and control the flow of the game
 function Game() {
-    // Saving the reference for 'this'
+    // Saving the 'this' reference
     var self = this;
 
     // This function sets the number of guesses and grabs the next word
     this.play = function() {
-        // User gets 10 tries
+        // User gets 10 guesses per round
         this.guessesLeft = 10;
         // Getting the next word by calling the nextWord() function
         this.nextWord();
@@ -31,7 +31,7 @@ function Game() {
     // This function creates a new Word object and allows the user to guest
     this.nextWord = function() {
         // This stores a football team name that is randomly picked from the wordsList array
-        var randomWord = wordsList[Math.floor(Math.random() * wordsList.length)];
+        var randomWord = nflList[Math.floor(Math.random() * nflList.length)];
         // This stores a random new Word object
         this.currentWord = new word(randomWord);
         // Logging the current word to the console
@@ -47,14 +47,15 @@ function Game() {
             // If the user has has no more guesses...
             if (self.guessesLeft < 1) {
                 // Logging a defeat message with the correct word to the console by calling the getSolution() function
-                console.log("Wrong! You ran out of guesses... The word was: " + self.currentWord.getSolution());
+                console.log("Sorry! You ran out of guesses...");
+                console.log("The team was the: " + self.currentWord.getSolution() + "!");
                 // Calling the playAgain() function
                 self.playAgain();
             }
             // Else if the user guessed correctly...
             else if (self.currentWord.guessedCorrectly()) {
                 // Logging a victory message with correct word to the console
-                console.log("Correct! The answer was: " + self.currentWord);
+                console.log("Touchdown! The team is the: " + self.currentWord + "!");
                 // Reseting the guesses back to 10
                 self.guessesLeft = 10;
                 // Calling the nextWord() function
@@ -75,7 +76,7 @@ function Game() {
             {
                 type: "confirm",
                 name: "choice",
-                message: "Play Again?"
+                message: "Try again?"
             }
         ])
         // Using the then() method to return a promise
@@ -100,7 +101,7 @@ function Game() {
             {
                 type: "input",
                 name: "choice",
-                message: "Guess the word!",
+                message: "Guess the NFL team!",
                 // This function ensures that the user input is clean, correct, and useful
                 validate: function(val) {
                     // Returns an array if a match is found using the gi modifier to do a case insensitive search of all occurrences of a regular expression in a string
